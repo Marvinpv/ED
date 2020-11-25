@@ -16,11 +16,11 @@
 using namespace std;
 
 template<class T>
-class ColaConPilas(){
+class ColaConPilas{
     private:
-        stack<T> cola;
+        stack<T> pila;
         stack<T> auxiliar;
-        int elementos
+        int elementos;
     public:
 
         ColaConPilas(){
@@ -31,8 +31,7 @@ class ColaConPilas(){
            return elementos == 0; 
         }
 
-        template<class T>
-        void Cola_max::push(const T &n){
+        void push(const T &n){
             if(this->vacia()){
                 pila.push(n);
             }else{
@@ -63,23 +62,31 @@ class ColaConPilas(){
 
         inline void pop(){
             pila.pop();
-            num_elementos--;
+            elementos--;
         }
 
-        template<class T>
-        T back()const{
+        T back(){
             T max;
-            auxiliar = pila;
-            while(auxiliar.size() > 1)
+            while(pila.size() > 1){
+                auxiliar.push(pila.top());
+                pila.pop();
+            }
+            max = pila.top();
+
+            while(!auxiliar.empty()){
+                pila.push(auxiliar.top());
                 auxiliar.pop();
+            }    
             
-            max = auxiliar.top();
+            return max;
         }
 
-        friend bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b);
+        //friend bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b);
 
+        //friend bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b);
 };
 
+/*
 template<class T>
 bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
     stack<T> aux_a(a.pila);
@@ -102,7 +109,7 @@ bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
 template<class T>
 bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
 
-    stack<T> aux_1(a.elementos),aux_2(b.elementos);
+    stack<T> aux_1(a.pila),aux_2(b.pila);
     bool menor = true;
 
     while(aux_1.top() == aux_2.top() && !aux_1.empty() && !aux_2.empty()){
@@ -120,7 +127,7 @@ bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
     return menor;
 
 }
-
+*/
 
 int main(){
     ColaConPilas<int> p,q;
@@ -130,19 +137,19 @@ int main(){
         q.push(i);
     }
   
-    if(p == q)
-        cout<<"p y q son iguales"<<endl;
+    //if(p == q)
+    //    cout<<"p y q son iguales"<<endl;
         
     p.push(11);        //Para ver si funciona 
     p.push(9);         //bien el elemento máximo
 
     cout<<"Primer elemento: "<<p.front()<<endl<<"Último elemento: "<<p.back()<<endl;
     while(!p.vacia()){
-        cout<<endl<<"Elemento:"<<p.front()<<endl<<"Número de elementos: "<<p.size()<<endl;
+        cout<<"Elemento:"<<p.front()<<endl<<"Número de elementos: "<<p.size()<<endl;
         p.pop();
     }
 
-    ColaConPilas c;
+    ColaConPilas<int> c;
     bool salir = false;
     int opcion;
     cout<<"Prueba de la clase ColaConPilas"<<endl;
