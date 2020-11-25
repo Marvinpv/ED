@@ -27,12 +27,12 @@ class ColaConPilas{
             elementos = 0;
         }
 
-        inline bool vacia()const{
+        inline bool empty()const{
            return elementos == 0; 
         }
 
         void push(const T &n){
-            if(this->vacia()){
+            if(this->empty()){
                 pila.push(n);
             }else{
 
@@ -144,7 +144,7 @@ int main(){
     p.push(9);         //bien el elemento máximo
 
     cout<<"Primer elemento: "<<p.front()<<endl<<"Último elemento: "<<p.back()<<endl;
-    while(!p.vacia()){
+    while(!p.empty()){
         cout<<"Elemento:"<<p.front()<<endl<<"Número de elementos: "<<p.size()<<endl;
         p.pop();
     }
