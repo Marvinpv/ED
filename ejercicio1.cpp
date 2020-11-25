@@ -45,7 +45,7 @@ int main(){
     stack<int> para_imprimir = prueba;
 
     cout<<"Pila introducida: "<<endl;
-    for(int i = 0 ;i < para_imprimir.size() ; i++){
+    while(!para_imprimir.empty()){
         cout<<para_imprimir.top()<<" ";
         para_imprimir.pop();
     }
@@ -54,7 +54,7 @@ int main(){
     modificar(prueba,0,1);
 
     cout<<"Cambiados ceros por unos..."<<endl;
-    for(int i = 0 ;i < prueba.size() ; i++){
+    while(!prueba.empty()){
         cout<<prueba.top()<<" ";
         prueba.pop();
     }
