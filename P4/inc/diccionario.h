@@ -32,7 +32,7 @@ class Diccionario{
         list<data<T,U>> datos;
 
         void Copiar(const Diccionario<T,U> &D){
-            this->Borrar();
+            this->Borrar(); //Hay que hacer esto??
 
             for(list<data<T,U>>::iterator it = D.datos.begin() ; it != D.datos.end() ; it++){
                 datos.push_back(*it);
@@ -52,7 +52,7 @@ class Diccionario{
 
         Diccionario(const Diccionario &D); //Función copiar???
 
-        ~Diccionario();
+        ~Diccionario(); //Llama al destructor de list?
 
         Diccionario<T,U> & operator=(const Diccionario<T,U> &D);
 

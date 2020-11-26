@@ -23,24 +23,17 @@ bool esOperador(char a){
     return operador;
 }
 
-bool esValidoParaOperadorIzq(char a){
-    bool valido = false;
-        if((a <= '9' && a >= '1') || a == ')')
-            valido = true; 
-    
-    return valido;
-}
+bool esNumero(char a){
+    bool esnum = false;
 
-bool esValidoParaOperadorDch(char a){
-    bool valido = false;
-        if((a <= '9' && a >= '1') || a == '(')
-            valido = true; 
+        if( a >= '1' && a <= '9')
+            esnum = true;
     
-    return valido;
+    return esnum;
 }
 
 
-
+/*
 bool parentizada(string expresion){
     bool bien = true;
     int parentesis_que_abren = 0,parentesis_que_cierran = 0;
@@ -70,6 +63,54 @@ bool parentizada(string expresion){
 
         if(esOperador(expresion[i]))
           bien = false;
+
+    return bien && (parentesis_que_abren == parentesis_que_cierran);
+}*/
+
+bool parentizada(string expresion){
+    stack<char> pila;
+    bool bien = true;
+    int parentesis_que_abren = 0;
+    int parentesis_que_cierran = 0;
+
+    if(expresion[0] == '(')
+        parentesis_que_abren++;
+
+    pila.push(expresion[0]);
+        for(int i = 1 ; i < expresion.length() -1 && bien; i++){
+            if(expresion[i] == '('){
+                if(!esOperador(pila.top()) && pila.top() != '(')
+                    bien = false;
+
+                if(!esNumero(expresion[i+1]) && expresion[i+1] != '(')
+                    bien = false;
+
+                parentesis_que_abren++;
+            }
+
+            if(esOperador(expresion[i])){
+                if(!esNumero(pila.top()) && pila.top() != ')')
+                    bien = false;
+                
+                if(!esNumero(expresion[i+1]) && expresion[i+1] != '(')
+                    bien = false;
+            }
+
+            if(expresion[i] == ')'){
+                if(!esNumero(pila.top()) && pila.top() != ')')
+                    bien = false;
+                
+                if(!esOperador(expresion[i+1]) && expresion[i+1] != ')')
+                    bien = false;
+                
+                parentesis_que_cierran++;
+            }
+
+            pila.push(expresion[i]);
+        }
+
+        if(expresion[expresion.length()-1] == ')')
+            parentesis_que_cierran++;
 
     return bien && (parentesis_que_abren == parentesis_que_cierran);
 }
