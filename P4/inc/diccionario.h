@@ -89,7 +89,6 @@ class Diccionario{
                 }
             }
             
-            cout << esta;
             return esta;
         }
 
@@ -117,7 +116,7 @@ class Diccionario{
 
         void AddSignificado_Palabra(const U &s,const T &p){
             typename list<data<T,U>>::iterator iter;
-            
+
             bool esta = Esta_Clave(p,iter);
 
             if(esta){
@@ -128,8 +127,7 @@ class Diccionario{
                 cout<<"Hasta aqui bien";
                 nuevodato.clave = p;
                 nuevodato.info.push_back(s);
-                cout<<"Hasta aqui bien";
-                this->datos.insert(iter,nuevodato);
+                Insertar(nuevodato.clave,nuevodato.info);
             }
 
         }
