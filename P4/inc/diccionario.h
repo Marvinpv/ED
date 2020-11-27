@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <list>
-
+#include <string>
 
 using namespace std;
 
@@ -11,7 +11,7 @@ template<class T,class U>
 struct data{
     T clave;
     list<U> info;
-}
+};
 
 template<class T,class U>
 bool operator<(const data<T,U> &d1, const data<T,U> &d2){
@@ -32,38 +32,136 @@ class Diccionario{
         list<data<T,U>> datos;
 
         void Copiar(const Diccionario<T,U> &D){
-            this->Borrar(); //Hay que hacer esto??
+            
+            this->Borrar(); 
 
-            for(list<data<T,U>>::iterator it = D.datos.begin() ; it != D.datos.end() ; it++){
+            for(typename list<data<T,U>>::iterator it = D.datos.begin() ; it != D.datos.end() ; it++){
                 datos.push_back(*it);
             }
 
         }
 
         void Borrar(){
-            for(list<data<T,U>>::iterator it = datos.begin() ; it != datos.end() ; it++){
-                datos.erase(it);
-            }
+            datos.clear();
         }
 
     public:
 
-        Diccionario(); //No hay nada que hacer?? PREGUNTAR
+        Diccionario(){
+            this->Borrar();
+        }
 
-        Diccionario(const Diccionario &D); //Función copiar???
+        Diccionario(const Diccionario &D){
+            this->datos = D.datos;
+        }
 
-        ~Diccionario(); //Llama al destructor de list?
+        ~Diccionario(){
+            datos.~list();
+        }
 
-        Diccionario<T,U> & operator=(const Diccionario<T,U> &D);
 
-        bool Esta_Clave(const T &p, typename list<data<T,U>>::iterator &it_out);
+        typename list<data<T,U>>::iterator end(){
+            return datos.end();
+        }
 
-        void Insertar(const T &clave,const list<U> &info);
+        typename list<data<T,U>>::iterator begin(){
+            return datos.begin();
+        }
 
-        void AddSignificado_Palabra(const U &s,const T &p);
+        Diccionario<T,U> & operator=(const Diccionario<T,U> &D){
+            this->Copiar(D);
+        }
 
-        list<U> getInfo_Asoc(const T &p);
+        bool Esta_Clave(const T &p, typename list<data<T,U>>::iterator &it_out){
+            bool esta = false;
 
-        int size()const;
+            if(!datos.empty()){
+                    it_out = this->end();
+                it_out--;
 
-}
+                while((*it_out).clave > p)
+                    it_out--;
+
+                if((*it_out).clave == p)
+                    esta = true;
+                else{
+                    it_out++;
+                }
+            }
+            
+            cout << esta;
+            return esta;
+        }
+
+        void Insertar(const T &pclave,const list<U> &pinfo){
+            data<T,U> nuevodato;
+            nuevodato.clave = pclave;
+            nuevodato.info = pinfo;
+
+            if(!this->datos.empty()){
+                
+                typename list<data<T,U>>::iterator iter;
+                cout <<"Bien hasta aqui";
+
+                bool esta = Esta_Clave(pclave,iter);
+                cout << "Funciona bien buscar";
+
+                if(!esta)
+                    this->datos.insert(iter,nuevodato);   
+            }else{
+                datos.push_back(nuevodato);
+            }                               //Hay que eliminar los elementos repetidos?
+            
+
+        }
+
+        void AddSignificado_Palabra(const U &s,const T &p){
+            typename list<data<T,U>>::iterator iter;
+            
+            bool esta = Esta_Clave(p,iter);
+
+            if(esta){
+                (*iter).info.push_back(s);
+            }else{
+                cout<<"Entra aqui";
+                data<T,U> nuevodato;
+                cout<<"Hasta aqui bien";
+                nuevodato.clave = p;
+                nuevodato.info.push_back(s);
+                cout<<"Hasta aqui bien";
+                this->datos.insert(iter,nuevodato);
+            }
+
+        }
+
+        list<U> getInfo_Asoc(const T &p){
+
+            list<U> devolver;
+            typename list<data<T,U>>::iterator iter;
+
+            if(Esta_Clave(p,iter))
+                devolver = (*iter).info;
+
+            return devolver;
+
+        }
+
+        int size()const{
+            return this->datos.size();
+        }
+
+        string Entradas_para_clave(const T &clave){
+            string s;
+            list<U> entradas = this->getInfo_Asoc(clave);
+            int i = 1;
+            for(typename list<U>::iterator iter = entradas.begin() ; iter != entradas.end() ; iter++){
+                s += i+": ";
+                s += *iter+"\n";
+                i++;
+            }
+
+            return s;
+        }
+};
+
+#endif
