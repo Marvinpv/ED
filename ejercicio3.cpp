@@ -31,7 +31,7 @@ class ColaConPilas{
            return elementos == 0; 
         }
 
-        void push(const T &n){
+        void push(const T &n){ //Esta operación tiene eficiencia O(n)
             if(this->empty()){
                 pila.push(n);
             }else{
@@ -61,7 +61,7 @@ class ColaConPilas{
         }
 
         inline void pop(){
-            pila.pop();
+            pila.pop();         //Esta operación tiene eficiencia O(1)
             elementos--;
         }
 
@@ -137,11 +137,10 @@ int main(){
         q.push(i);
     }
   
-    //if(p == q)
-    //    cout<<"p y q son iguales"<<endl;
+   
         
-    p.push(11);        //Para ver si funciona 
-    p.push(9);         //bien el elemento máximo
+    p.push(11);      
+    p.push(9);        
 
     cout<<"Primer elemento: "<<p.front()<<endl<<"Último elemento: "<<p.back()<<endl;
     while(!p.empty()){

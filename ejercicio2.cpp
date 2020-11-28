@@ -93,21 +93,7 @@ bool parentizada(string expresion){
                     bien = false;
                 
                 if(!esNumero(expresion[i+1]) && expresion[i+1] != '(')
-                    bien = false;
-            }
-
-            if(expresion[i] == ')'){
-                if(!esNumero(pila.top()) && pila.top() != ')')
-                    bien = false;
-                
-                if(!esOperador(expresion[i+1]) && expresion[i+1] != ')')
-                    bien = false;
-                
-                parentesis_que_cierran++;
-            }
-
-            pila.push(expresion[i]);
-        }
+                 
 
         if(expresion[expresion.length()-1] == ')')
             parentesis_que_cierran++;
