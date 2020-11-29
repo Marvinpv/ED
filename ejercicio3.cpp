@@ -57,7 +57,10 @@ class ColaConPilas{
         }
 
         inline int front()const{
-            return pila.top();
+            if(elementos > 0)
+                return pila.top();
+            
+            return 0;
         }
 
         inline void pop(){
@@ -81,53 +84,52 @@ class ColaConPilas{
             return max;
         }
 
-        //friend bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b);
+        
+        friend bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
+            stack<T> aux_a = a.pila;
+            stack<T> aux_b = b.pila;
+            bool iguales = true;
 
-        //friend bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b);
+            if(aux_a.size() != aux_b.size())
+                iguales = false;
+
+            while(iguales && !aux_a.empty()){
+                if(aux_a.top() != aux_b.top()){
+                    iguales = false;
+                }
+                    
+                aux_a.pop();
+                aux_b.pop();
+            }
+
+            return iguales;
+        }
+
+        
+        friend bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
+
+            stack<T> aux_1(a.pila),aux_2(b.pila);
+            bool menor = true;
+
+            while(aux_1.top() == aux_2.top() && !aux_1.empty() && !aux_2.empty()){
+                aux_1.pop();
+                aux_2.pop();  
+            }
+
+            if(aux_1.empty())
+                menor = true;
+            else if(aux_2.empty())
+                menor = false;
+            else
+                menor = aux_1.top() < aux_2.top();
+
+            return menor;
+
+        }
 };
 
-/*
-template<class T>
-bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
-    stack<T> aux_a(a.pila);
-    stack<T> aux_b(b.pila);
-    bool iguales = true;
 
-    if(aux_a.size() != aux_b.size())
-        iguales = false;
 
-    while(iguales && !aux_a.empty()){
-        if(aux_a.top() =! aux_b.top())
-            iguales = false;
-        aux_a.pop();
-        aux_b.pop();
-    }
-
-    return iguales;
-}
-
-template<class T>
-bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
-
-    stack<T> aux_1(a.pila),aux_2(b.pila);
-    bool menor = true;
-
-    while(aux_1.top() == aux_2.top() && !aux_1.empty() && !aux_2.empty()){
-        aux_1.pop();
-        aux_2.pop();  
-    }
-
-    if(aux_1.empty())
-        menor = true;
-    else if(aux_2.empty())
-        menor = false;
-    else
-        menor = aux_1.top() < aux_2.top();
-
-    return menor;
-
-}
-*/
 
 int main(){
     ColaConPilas<int> p,q;
@@ -137,7 +139,8 @@ int main(){
         q.push(i);
     }
   
-   
+    if(p == q)
+        cout<<"p y q son iguales"<<endl;
         
     p.push(11);      
     p.push(9);        

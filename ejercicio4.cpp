@@ -69,17 +69,56 @@ class PilaConColas{
             return elementos; 
         }
 
+        friend bool operator<(const PilaConColas<T> & a,const PilaConColas<T> &b){
+            queue<T> aux_1 = a.duo[a.usando];
+            queue<T> aux_2 = b.duo[b.usando];
+            bool menor = true;
 
+            while(aux_1.front() == aux_2.front() && !aux_1.empty() && !aux_2.empty()){
+                aux_1.pop();             //Se busca el primer elemento diferente
+                aux_2.pop();  
+            }
+
+            if(aux_1.empty())               //Si todos los elementos son iguales y a es mas corta que b, entonces menor es true
+                menor = true;
+            else if(aux_2.empty())
+                menor = false;              //Si ocurre lo mismo pero con b en vez de a, entonces menor es false
+            else
+                menor = aux_1.front() < aux_2.front(); //Si se ha llegado a un elemento distinto entonces se calcula cual es menor
+
+            return menor;
+        }
+
+        friend bool operator==(const PilaConColas & a, const PilaConColas & b){
+            queue<T> aux_1(a.duo[a.usando]),aux_2(b.duo[b.usando]);
+            bool igual = true;
+                
+                if(aux_1.size() != aux_2.size())
+                    igual = false;          //Si no tienen el mismo número de elementos ya sabemos que no son iguales
+
+                while(igual && !aux_1.empty()){
+                    if(aux_1.front() != aux_2.front())    //Si tienen el mismo número de elementos
+                        igual = false;                      //Se comprueban 1 a 1 los elementos de cada pila
+                    aux_1.pop();
+                    aux_2.pop();
+                }
+
+            return igual;
+        }
 };
 
 
 
 int main(){
-    PilaConColas<int> p;
+    PilaConColas<int> p,q;
     int i;
     for( i = 10 ; i >= 0 ; i--){
         p.push(i);
+        q.push(i);
     }
+
+    if(p == q)
+        cout<<"p y q son iguales"<<endl;
         
     p.push(11);        //Para ver si funciona 
     p.push(9);         //bien el elemento máximo
