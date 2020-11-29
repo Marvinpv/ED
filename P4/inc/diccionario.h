@@ -51,7 +51,7 @@ class Diccionario{
             this->Borrar();
         }
 
-        Diccionario(const Diccionario &D){
+        Diccionario(const Diccionario<T,U> &D){
             this->datos = D.datos;
         }
 
@@ -79,14 +79,14 @@ class Diccionario{
                     it_out = this->end();
                 it_out--;
 
-                while((*it_out).clave > p)
+                while((*it_out).clave > p && it_out != this->begin())
                     it_out--;
 
                 if((*it_out).clave == p)
                     esta = true;
-                else{
+                else if((*it_out).clave < p)
                     it_out++;
-                }
+                
             }
             
             return esta;
@@ -100,10 +100,10 @@ class Diccionario{
             if(!this->datos.empty()){
                 
                 typename list<data<T,U>>::iterator iter;
-                cout <<"Bien hasta aqui";
+                
 
                 bool esta = Esta_Clave(pclave,iter);
-                cout << "Funciona bien buscar";
+                
 
                 if(!esta)
                     this->datos.insert(iter,nuevodato);   
@@ -153,9 +153,42 @@ class Diccionario{
             list<U> entradas = this->getInfo_Asoc(clave);
             int i = 1;
             for(typename list<U>::iterator iter = entradas.begin() ; iter != entradas.end() ; iter++){
-                s += i+": ";
-                s += *iter+"\n";
-                i++;
+                char ic = (char)i + '0';
+                    s +="\t";
+                    s += ic  ;
+                    s += ": " + *iter;
+                    s += "\n";
+                    i++;
+            }
+
+            return s;
+        }
+
+        Diccionario & operator+=(Diccionario<T,U> & otro){
+            typename list<data<T,U>>::iterator iter ;
+            for(iter = otro.begin() ; iter != otro.end() ; iter++){
+                this->Insertar((*iter).clave,(*iter).info);
+            }
+
+            return *this;
+        }
+
+        string Contenido_del_Diccionario(){
+
+            string s;
+            for(typename list<data<T,U>>::iterator iter = this->begin() ; iter != this->end() ; iter++){
+                s+= (*iter).clave + ":\n";
+                list<U> entradas = (*iter).info;
+                int i = 1;
+                for(typename list<U>::iterator iter = entradas.begin() ; iter != entradas.end() ; iter++){
+                    char ic = (char)i + '0';
+                    s +="\t";
+                    s += ic  ;
+                    s += ": " + *iter;
+                    s += "\n";
+                    i++;
+                }
+
             }
 
             return s;
