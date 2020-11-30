@@ -16,6 +16,17 @@
 
 using namespace std;
 
+bool mayor(string cadena1, string cadena2){
+    bool mayor;
+
+        if(cadena1.length() > cadena2.length())
+            mayor = true;
+        else
+            mayor = cadena1 > cadena2;
+    
+    return mayor;
+}
+
 class ColaconPrioridad{
     private:
     list<string> cola_cadenas;
@@ -27,20 +38,20 @@ class ColaconPrioridad{
         cola_cadenas = otra.cola_cadenas;
     }
 
-    void push(string nc){
+    void push(string cad){
         if(cola_cadenas.empty()){
             cola_cadenas.push_back(nc);
         }else{
             list<nombre_completo>::iterator iter;
             iter = cola_cadenas.end();
             
-            while(iter != cola_cadenas.begin() && (*iter).prioridad > nc.prioridad)
+            while(iter != cola_cadenas.begin() && mayor(cad,*iter))
                 iter--;
 
-            if((*iter).prioridad < nc.prioridad)
+            if((*iter) < cad)
                 iter++;
             
-            cola_nombres.insert(iter,nc);
+            cola_nombres.insert(iter,cad);
         }
     }
 
@@ -71,3 +82,30 @@ class ColaconPrioridad{
     }
 
 };
+
+
+int main(){
+    nombre_completo nc;
+    ColaconPrioridad cola; 
+    int nombres;
+    cout<<"¿Cuántos nombres quiere introducir? ";
+    cin >> nombres;
+
+    for(int i = 0; i < nombres; i++){
+        cout<<"Nombre: ";
+        cin >>nc.nombre;
+        cin.ignore();
+        cout<<"Apellidos: ";
+        getline(cin,nc.apellidos);
+        cout<<"Prioridad: ";
+        cin >> nc.prioridad;
+        cola.push(nc);
+    }
+
+    cout<<endl;
+    while(!cola.empty()){
+        cout<<cola.front().nombre<<" "<<cola.front().apellidos<<endl;
+        cola.pop();
+    }
+
+}
