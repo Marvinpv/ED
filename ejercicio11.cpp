@@ -1,3 +1,13 @@
+/**
+ * @file ejercicio11.cpp
+ * @author Marvin Peinado Vidaña
+ * @brief 
+ * @version 0.1
+ * @date 2020-11-30
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
 #include <iostream>
 #include <list>
 #include <string>
