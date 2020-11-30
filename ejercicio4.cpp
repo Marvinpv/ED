@@ -21,6 +21,7 @@ class PilaConColas{
     private:
         queue<T> duo[2];
         int usando;
+        
         int elementos;
     public:
         PilaConColas(){
