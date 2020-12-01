@@ -39,7 +39,8 @@ class ColaconPrioridad{
         }else{
             list<nombre_completo>::iterator iter;
             iter = cola_nombres.end();
-            
+            iter--;
+
             while(iter != cola_nombres.begin() && (*iter).prioridad > nc.prioridad)
                 iter--;
 

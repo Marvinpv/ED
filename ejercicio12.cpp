@@ -21,6 +21,8 @@ bool mayor(string cadena1, string cadena2){
 
         if(cadena1.length() > cadena2.length())
             mayor = true;
+        else if(cadena2.length() > cadena1.length())
+            mayor = false;
         else
             mayor = cadena1 > cadena2;
     
@@ -32,26 +34,31 @@ class ColaconPrioridad{
     list<string> cola_cadenas;
 
     public:
-    ColaconPrioridad();
+    ColaconPrioridad(){
+
+    }
 
     ColaconPrioridad(const ColaconPrioridad &otra){
         cola_cadenas = otra.cola_cadenas;
     }
 
-    void push(string cad){
+    void push(string cad){                                        
         if(cola_cadenas.empty()){
-            cola_cadenas.push_back(nc);
+            cola_cadenas.push_back(cad);
         }else{
-            list<nombre_completo>::iterator iter;
+            list<string>::iterator iter;
             iter = cola_cadenas.end();
-            
-            while(iter != cola_cadenas.begin() && mayor(cad,*iter))
-                iter--;
+            iter--;
 
-            if((*iter) < cad)
+            while((iter != cola_cadenas.begin()) && mayor(cad,*iter))
+                iter--;
+                
+
+            if(mayor(*iter,cad))
                 iter++;
             
-            cola_nombres.insert(iter,cad);
+            
+            cola_cadenas.insert(iter,cad);
         }
     }
 
@@ -85,7 +92,7 @@ class ColaconPrioridad{
 
 
 int main(){
-    nombre_completo nc;
+    string cadena;
     ColaconPrioridad cola; 
     int nombres;
     cout<<"¿Cuántos nombres quiere introducir? ";
@@ -93,18 +100,13 @@ int main(){
 
     for(int i = 0; i < nombres; i++){
         cout<<"Nombre: ";
-        cin >>nc.nombre;
-        cin.ignore();
-        cout<<"Apellidos: ";
-        getline(cin,nc.apellidos);
-        cout<<"Prioridad: ";
-        cin >> nc.prioridad;
-        cola.push(nc);
+        cin >>cadena;
+        cola.push(cadena);
     }
 
     cout<<endl;
     while(!cola.empty()){
-        cout<<cola.front().nombre<<" "<<cola.front().apellidos<<endl;
+        cout<<cola.front()<<endl;
         cola.pop();
     }
 
