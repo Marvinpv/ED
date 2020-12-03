@@ -1,9 +1,9 @@
 /**
- * @file ejercicio12.cpp
+ * @file ejercicio13.cpp
  * @author Marvin Peinado Vidaña
  * @brief 
  * @version 0.1
- * @date 2020-11-30
+ * @date 2020-12-01
  * 
  * @copyright Copyright (c) 2020
  * 
@@ -13,18 +13,32 @@
 #include <list>
 #include <string>
 #include <cmath>
+#include <cctype>
 
 using namespace std;
 
-bool mayor(string cadena1, string cadena2){
-    bool mayor;
+int vocales(string cad){
+    int v = 0;
+    for(int i = 0 ; i < cad.length() ; i++){
+        char letra = tolower(cad[i]);
+        if(letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u')
+            v++;
+    }
 
-        if(cadena1.length() > cadena2.length())
+    return v;
+}
+
+bool mayor(string cad1, string cad2){
+    bool mayor;
+    int vocales1 = vocales(cad1),
+        vocales2 = vocales(cad2);
+
+        if(vocales1 > vocales2)
             mayor = true;
-        else if(cadena2.length() > cadena1.length())
+        else if(vocales2 > vocales1)
             mayor = false;
         else
-            mayor = cadena1 < cadena2;
+            mayor = cad1 < cad2;
     
     return mayor;
 }
@@ -87,9 +101,7 @@ class colaconprioridad{
 
         return *this;
     }
-
 };
-
 
 int main(){
     string cadena;

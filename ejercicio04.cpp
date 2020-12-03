@@ -17,16 +17,22 @@
 using namespace std;
 
 template<class T>
-class PilaConColas{
+class pila{
     private:
         queue<T> duo[2];
         int usando;
-        
         int elementos;
     public:
-        PilaConColas(){
+        pila(){
             usando = 0;
             elementos = 0;
+        }
+
+        pila(const pila<T> &otra){
+            duo[0] = otra.duo[0];
+            duo[1] = otra.duo[1];
+            usando = otra.usando;
+            elementos = otra.elementos;
         }
 
         inline bool empty()const{
@@ -70,7 +76,20 @@ class PilaConColas{
             return elementos; 
         }
 
-        friend bool operator<(const PilaConColas<T> & a,const PilaConColas<T> &b){
+        const pila & operator=(const pila & otra){
+            
+            if(this != &otra){
+                duo[0] = otra.duo[0];
+                duo[1] = otra.duo[1];
+                usando = otra.usando;
+                elementos = otra.elementos;
+            }
+            
+
+            return *this;
+        }
+
+        friend bool operator<(const pila<T> & a,const pila<T> &b){
             queue<T> aux_1 = a.duo[a.usando];
             queue<T> aux_2 = b.duo[b.usando];
             bool menor = true;
@@ -90,7 +109,7 @@ class PilaConColas{
             return menor;
         }
 
-        friend bool operator==(const PilaConColas & a, const PilaConColas & b){
+        friend bool operator==(const pila & a, const pila & b){
             queue<T> aux_1(a.duo[a.usando]),aux_2(b.duo[b.usando]);
             bool igual = true;
                 
@@ -111,7 +130,7 @@ class PilaConColas{
 
 
 int main(){
-    PilaConColas<int> p,q;
+    pila<int> p,q;
     int i;
     for( i = 10 ; i >= 0 ; i--){
         p.push(i);
@@ -128,10 +147,10 @@ int main(){
         p.pop();
     }
 
-    PilaConColas<int> c;
+    pila<int> c;
     bool salir = false;
     int opcion;
-    cout<<"Prueba de la clase PilaConColas"<<endl;
+    cout<<"Prueba de la clase pila"<<endl;
     do{
         cout<<"¿Qué desea hacer?"<<endl
             <<"1: meter un elemento"<<endl

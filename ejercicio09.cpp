@@ -17,9 +17,9 @@
 
 using namespace std;
 
-pair<int,int> buscar_entrada(char **laberinto, int num_filas, int num_cols){
-    for(int i = 0 ; i < num_filas ; i++){
-        for(int j = 0 ; j < num_cols ; j++){
+pair<int,int> buscar_entrada(char **laberinto, int filas, int columnas){
+    for(int i = 0 ; i < filas ; i++){
+        for(int j = 0 ; j < columnas ; j++){
             if(laberinto[i][j] == 'E'){
                 pair<int,int> devolver(i,j);
                 return devolver;
@@ -31,16 +31,16 @@ pair<int,int> buscar_entrada(char **laberinto, int num_filas, int num_cols){
     return no_encontrado;
 }
 
-pair<int,int> siguiente_paso(pair<int,int> paso_anterior,char **laberinto, int num_filas, int num_cols,bool &salida_encontrada){
+pair<int,int> siguiente_paso(pair<int,int> paso_anterior,char **laberinto, int filas, int columnas,bool &salida_encontrada){
     pair<int,int> siguiente = paso_anterior;
 
     if(paso_anterior.first > 0 && (laberinto[paso_anterior.first-1][paso_anterior.second] == '0' || laberinto[paso_anterior.first-1][paso_anterior.second] == 'S'))
         siguiente = make_pair(paso_anterior.first-1,paso_anterior.second);
-    else if(paso_anterior.first < num_filas-1 && (laberinto[paso_anterior.first+1][paso_anterior.second] == '0' || laberinto[paso_anterior.first+1][paso_anterior.second] == 'S'))
+    else if(paso_anterior.first < filas-1 && (laberinto[paso_anterior.first+1][paso_anterior.second] == '0' || laberinto[paso_anterior.first+1][paso_anterior.second] == 'S'))
         siguiente = make_pair(paso_anterior.first+1,paso_anterior.second);
     else if(paso_anterior.second > 0 && (laberinto[paso_anterior.first][paso_anterior.second - 1] == '0' || laberinto[paso_anterior.first][paso_anterior.second-1] == 'S'))
         siguiente = make_pair(paso_anterior.first,paso_anterior.second-1);
-    else if(paso_anterior.second < num_cols-1 && (laberinto[paso_anterior.first][paso_anterior.second + 1] == '0' || laberinto[paso_anterior.first][paso_anterior.second+1] == 'S'))
+    else if(paso_anterior.second < columnas-1 && (laberinto[paso_anterior.first][paso_anterior.second + 1] == '0' || laberinto[paso_anterior.first][paso_anterior.second+1] == 'S'))
         siguiente = make_pair(paso_anterior.first,paso_anterior.second+1);
     
 
@@ -50,13 +50,13 @@ pair<int,int> siguiente_paso(pair<int,int> paso_anterior,char **laberinto, int n
     return siguiente;
 }
 
-stack<pair<int,int>> salida_laberinto(char **laberinto, int num_filas, int num_cols){
+stack<pair<int,int>> salida_laberinto(char **laberinto, int filas, int columnas){
     stack<pair<int,int>> camino;
-    camino.push(buscar_entrada(laberinto,num_filas,num_cols));
+    camino.push(buscar_entrada(laberinto,filas,columnas));
     bool salida_encontrada = false;
         while(!salida_encontrada){
 
-            pair<int,int> sig_paso = siguiente_paso(camino.top(),laberinto,num_filas,num_cols,salida_encontrada);
+            pair<int,int> sig_paso = siguiente_paso(camino.top(),laberinto,filas,columnas,salida_encontrada);
 
             if(sig_paso == camino.top()){
                 laberinto[sig_paso.first][sig_paso.second] = '1';

@@ -14,6 +14,7 @@
 #include <stack>
 #include <string>
 #include <cmath>
+#include <cctype>
 
 using namespace std;
 
@@ -28,8 +29,8 @@ bool palindromo(string cadena){
 
     bool es_palindromo = true;
 
-    for(int i = 0; i < cadena.length() && es_palindromo; i++){
-        if(pila_aux.top() != cola_aux.front())
+    while(!pila_aux.empty() && !cola_aux.empty() && es_palindromo){
+        if(tolower(pila_aux.top()) != tolower(cola_aux.front()))
             es_palindromo = false;
 
         pila_aux.pop();
@@ -44,7 +45,7 @@ int main(){
     string palabra;
 
     cout<< "Inserta palabra para saber si es un palindromo: ";
-    cin >> palabra;
+    getline(cin,palabra);
 
     if(palindromo(palabra))
         cout<<"Es un palindromo"<<endl;

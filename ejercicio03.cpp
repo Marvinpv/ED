@@ -16,15 +16,21 @@
 using namespace std;
 
 template<class T>
-class ColaConPilas{
+class cola{
     private:
         stack<T> pila;
         stack<T> auxiliar;
         int elementos;
     public:
 
-        ColaConPilas(){
+        cola(){
             elementos = 0;
+        }
+
+        cola(const cola<T> &otra){
+            pila = otra.pila;
+            auxiliar = otra.auxiliar;
+            elementos = otra.elementos;
         }
 
         inline bool empty()const{
@@ -84,8 +90,20 @@ class ColaConPilas{
             return max;
         }
 
+        const cola & operator=(const cola<T> & otra){
+
+            if(this != &otra){
+                pila = otra.pila;
+                auxiliar = otra.auxiliar;
+                elementos = otra.elementos; 
+            }
+            
+
+            return *this;
+        }
+
         
-        friend bool operator==(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
+        friend bool operator==(const cola<T> &a,const cola<T> &b){
             stack<T> aux_a = a.pila;
             stack<T> aux_b = b.pila;
             bool iguales = true;
@@ -106,7 +124,7 @@ class ColaConPilas{
         }
 
         
-        friend bool operator<(const ColaConPilas<T> &a,const ColaConPilas<T> &b){
+        friend bool operator<(const cola<T> &a,const cola<T> &b){
 
             stack<T> aux_1(a.pila),aux_2(b.pila);
             bool menor = true;
@@ -132,7 +150,7 @@ class ColaConPilas{
 
 
 int main(){
-    ColaConPilas<int> p,q;
+    cola<int> p,q;
     int i;
     for( i = 0 ; i <= 10 ; i++){
         p.push(i);
@@ -151,10 +169,10 @@ int main(){
         p.pop();
     }
 
-    ColaConPilas<int> c;
+    cola<int> c;
     bool salir = false;
     int opcion;
-    cout<<"Prueba de la clase ColaConPilas"<<endl;
+    cout<<"Prueba de la clase cola"<<endl;
     do{
         cout<<"¿Qué desea hacer?"<<endl
             <<"1: meter un elemento"<<endl

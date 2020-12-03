@@ -18,11 +18,21 @@
 using namespace std;
 
 template<class T>
-class Ventana{
+class ventana{
     private:                //La decision es arbitraria, en mi caso el elemento
         stack<T> pila_izq;  //actual se encontrará en el tope de la pila de la izquierda
         stack<T> pila_dch;
     public:
+        ventana(){
+
+        }
+
+        ventana(const ventana<T> &otra){
+            pila_izq = otra.pila_izq;
+            pila_dch = otra.pila_dch;
+        }
+
+
         void insertar(T elemento){
             pila_izq.push(elemento);
         }
@@ -62,10 +72,10 @@ class Ventana{
 
 int main(){
 
-    Ventana<int> v;
+    ventana<int> v;
     bool salir = false;
     int opcion;
-    cout<<"Prueba de la clase Ventana"<<endl;
+    cout<<"Prueba de la clase ventana"<<endl;
     do{
         cout<<"¿Qué desea hacer?"<<endl
             <<"1: meter un elemento"<<endl

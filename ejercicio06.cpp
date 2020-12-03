@@ -21,7 +21,7 @@ template<class T>
 void insertar(stack<T> &P, int pos, const T &x){
     stack<T> aux;
 
-    for(int i = P.size() ; i > pos && !P.empty() ; i--){
+    for(int i = 0 ; i < pos && !P.empty() ; i++){
         aux.push(P.top());
         P.pop();
     }

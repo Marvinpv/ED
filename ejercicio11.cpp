@@ -21,15 +21,15 @@ struct nombre_completo{
     int prioridad;
 };
 
-class ColaconPrioridad{
+class colaconprioridad{
     private:
     list<nombre_completo> cola_nombres;
     public:
-    ColaconPrioridad(){
+    colaconprioridad(){
 
     }
 
-    ColaconPrioridad(const ColaconPrioridad &otra){
+    colaconprioridad(const colaconprioridad &otra){
         cola_nombres = otra.cola_nombres;
     }
 
@@ -69,7 +69,7 @@ class ColaconPrioridad{
     }
 
 
-    const ColaconPrioridad & operator=(const ColaconPrioridad &otro){
+    const colaconprioridad & operator=(const colaconprioridad &otro){
         if(this != &otro){
             cola_nombres = otro.cola_nombres;
         }
@@ -83,7 +83,7 @@ class ColaconPrioridad{
 
 int main(){
     nombre_completo nc;
-    ColaconPrioridad cola; 
+    colaconprioridad cola; 
     int nombres;
     cout<<"¿Cuántos nombres quiere introducir? ";
     cin >> nombres;
