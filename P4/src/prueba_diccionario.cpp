@@ -8,6 +8,7 @@ int main(){
     significados_a_aniadir.push_back("animal felino doméstico");
     significados_a_aniadir.push_back("aparato que se usa en los talleres");
     dic_a_aniadir.Insertar("gato",significados_a_aniadir);
+    
 
 
     int opcion;
@@ -22,7 +23,8 @@ int main(){
              << "2: Añadir un significado a una palabra ya existente " << endl
              << "3: Buscar una palabra en el diccionario "             << endl
              << "4: Combinar diccionario con otro de prueba"           << endl
-             << "5: Salir "                                            << endl;
+             << "5: Imprimir el diccionario completo "                 << endl
+             << "6: Salir "                                            << endl;
         cin  >> opcion;
 
         switch (opcion){
@@ -81,6 +83,10 @@ int main(){
                     cout << contenido;
             }
                 break;
+            case 5:
+                cout << "El contenido del diccionario es: "    <<endl
+                     << dic_prueba.Contenido_del_Diccionario() <<endl;
+                break;
             default:
 
                 salir = true; 
@@ -88,8 +94,6 @@ int main(){
         }
 
     }while(!salir);
-
-    dic_prueba.~Diccionario();
 
     return 0;
 }
