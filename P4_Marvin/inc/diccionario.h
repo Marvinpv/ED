@@ -185,13 +185,13 @@ class Diccionario{
                     it_out = this->end();
                 it_out--;
 
-                while((*it_out).clave > p && it_out != this->begin())
-                    it_out--;
+                while((*it_out).clave > p && it_out != this->begin()) //Mientras la clave sea mayor, se va decrementando, ya que 
+                    it_out--;                                         //La lista se irá insertando ordenadamente
 
-                if((*it_out).clave == p)
-                    esta = true;
-                else if((*it_out).clave < p)
-                    it_out++;
+                if((*it_out).clave == p)                              
+                    esta = true;                                       
+                else if((*it_out).clave < p)                           //si no está la clave se coloca el iterador
+                    it_out++;                                          //donde habría que insertarla
                 
             }
             
@@ -212,8 +212,8 @@ class Diccionario{
             nuevodato.clave = pclave;
             nuevodato.info = pinfo;
 
-            if(!this->datos.empty()){
-                
+            if(!this->datos.empty()){                   //Si la lista no está vacía se busca el sitio donde colocar
+                                                        //La nueva entrada
                 Diccionario<T,U>::iterator iter;
                 
 
@@ -221,7 +221,7 @@ class Diccionario{
                 
 
                 if(!esta)
-                    this->datos.insert(iter,nuevodato);
+                    this->datos.insert(iter,nuevodato); //Si no hay ninguna entrada con esa clave, se coloca
   
             }else{
                 datos.push_back(nuevodato);
@@ -244,10 +244,10 @@ class Diccionario{
             bool esta = Esta_Clave(p,iter);
 
             if(esta){
-                (*iter).info.push_back(s);
+                (*iter).info.push_back(s);  //Si la clave está, se inserta el nuevo significado
             }else{
                 data<T,U> nuevodato;
-                nuevodato.clave = p;
+                nuevodato.clave = p;        //Si no está, se crea una nueva entrada
                 nuevodato.info.push_back(s);
                 Insertar(nuevodato.clave,nuevodato.info);
             }
@@ -295,7 +295,7 @@ class Diccionario{
             for(typename list<U>::iterator iter = entradas.begin() ; iter != entradas.end() ; iter++){
                 char ic = (char)i + '0';
                     s +="\t";
-                    s += ic  ;
+                    s += ic  ;          //Las definiciones se tabulan para una mejor presentación
                     s += ": " + *iter;
                     s += "\n";
                     i++;
@@ -312,7 +312,7 @@ class Diccionario{
          * @return Diccionario& union de los dos diccionarios
          */
         Diccionario & operator+=(Diccionario<T,U> & otro){
-            typename Diccionario<T,U>::iterator iter ;                   //Utilidad adicional
+            typename Diccionario<T,U>::iterator iter ;                   
             for(iter = otro.begin() ; iter != otro.end() ; iter++){
                 this->Insertar((*iter).clave,(*iter).info);
             }
@@ -326,16 +326,16 @@ class Diccionario{
          * 
          * @return string Contenido del diccionario
          */
-        string Contenido_del_Diccionario(){                            //Utilidad adicional
+        string Contenido_del_Diccionario(){                            
 
             string s;
             for(typename Diccionario<T,U>::iterator iter = this->begin() ; iter != this->end() ; iter++){
-                s+= (*iter).clave + ":\n";
+                s+= (*iter).clave + ":\n";          //Se guarda la clave
                 list<U> entradas = (*iter).info;
                 int i = 1;
                 for(typename list<U>::iterator iter = entradas.begin() ; iter != entradas.end() ; iter++){
                     char ic = (char)i + '0';
-                    s +="\t";
+                    s +="\t";                       //Se guardan a continuación las definiciones tabuladas
                     s += ic  ;
                     s += ": " + *iter;
                     s += "\n";

@@ -1,3 +1,14 @@
+/**
+ * @file prueba_diccionario.cpp
+ * @author Marvin Peinado Vidaña
+ * @brief Menú de prueba del TDA Diccionario
+ * @version 0.1
+ * @date 2020-12-06
+ * 
+ * @copyright Copyright (c) 2020
+ * 
+ */
+
 #include "diccionario.h"
 
 
