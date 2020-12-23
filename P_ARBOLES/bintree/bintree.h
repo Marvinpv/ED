@@ -4,7 +4,7 @@
 /**
    TDA bintree.
 
-   Representa un árbol binario con nodos etiquetados con datos del tipo T.
+   Representa un ï¿½rbol binario con nodos etiquetados con datos del tipo T.
 
    T debe tener definidas las operaciones:
 
@@ -13,7 +13,7 @@
    - bool opertaor==(const T & e);
 
    Son mutables.
-   Residen en memoria dinámica.
+   Residen en memoria dinï¿½mica.
    
    Un ejemplo de su uso:
    @include usobintree.cpp
@@ -34,36 +34,36 @@ public:
   /**
      @brief Constructor primitivo por defecto.
      
-     Crea un árbol nulo.
+     Crea un ï¿½rbol nulo.
   */
   bintree();
 
   /**
      @brief Constructor primitivo.
      
-     @param e Etiqueta para la raíz.
+     @param e Etiqueta para la raï¿½z.
      
-     Crea un árbol con un único nodo etiquetado con e.
+     Crea un ï¿½rbol con un ï¿½nico nodo etiquetado con e.
   */
   bintree(const T & e);
 
   /**
      @brief Constructor de copia.
      
-     @param a árbol que se copia.
+     @param a ï¿½rbol que se copia.
      
-     Crea un árbol duplicado exacto de a.
+     Crea un ï¿½rbol duplicado exacto de a.
   */
   bintree (const bintree<T> & a);
 
   /**
-     @brief Reemplaza el receptor por una copia de subárbol.
+     @brief Reemplaza el receptor por una copia de subï¿½rbol.
 
      @param a Arbol desde el que se copia.
-     @param n nodo raíz del subárbol que se copia.
+     @param n nodo raï¿½z del subï¿½rbol que se copia.
 
-     El receptor se hace nulo y después se le asigna una copia
-     del subárbol de a cuya raíz es n.
+     El receptor se hace nulo y despuï¿½s se le asigna una copia
+     del subï¿½rbol de a cuya raï¿½z es n.
   */
   void assign_subtree(const bintree<T> & a, node n);
 
@@ -75,9 +75,9 @@ public:
   ~bintree();
 
   /**
-     @brief Operador de asignación.
+     @brief Operador de asignaciï¿½n.
      
-     @param a: árbol que se asigna.
+     @param a: ï¿½rbol que se asigna.
      
      Destruye el contenido previo del receptor y le asigna un
      duplicado de a.
@@ -85,32 +85,32 @@ public:
   bintree<T> & operator=(const bintree<T> & a);
 
   /**
-     @brief Obtener el nodo raíz.
+     @brief Obtener el nodo raï¿½z.
      
-     @return nodo raíz del receptor.
+     @return nodo raï¿½z del receptor.
   */
   node root() const;
   
   /**
-     @brief Podar el subárbol a la izquierda de un nodo.
+     @brief Podar el subï¿½rbol a la izquierda de un nodo.
 
      @param n: nodo del receptor. !n.null().
-     @param dest: subárbol a la izquierda de n. Es MODIFICADO.
+     @param dest: subï¿½rbol a la izquierda de n. Es MODIFICADO.
 
-     Desconecta el subárbol a la izquierda de n, que pasa a
-     ser un árbol nulo. El subárbol anterior se devuelve sobre
+     Desconecta el subï¿½rbol a la izquierda de n, que pasa a
+     ser un ï¿½rbol nulo. El subï¿½rbol anterior se devuelve sobre
      dest.
   */
   void prune_left(node n, bintree<T> & dest);
 
   /**
-     @brief Podar el subárbol a la derecha de un nodo.
+     @brief Podar el subï¿½rbol a la derecha de un nodo.
 
      @param n: nodo del receptor. !n.null().
-     @param dest: subárbol a la derecha de n. Es MODIFICADO.
+     @param dest: subï¿½rbol a la derecha de n. Es MODIFICADO.
 
-     Desconecta el subárbol a la derecha de n, que pasa a
-     ser un árbol nulo. El subárbol anterior se devuelve sobre
+     Desconecta el subï¿½rbol a la derecha de n, que pasa a
+     ser un ï¿½rbol nulo. El subï¿½rbol anterior se devuelve sobre
      dest.
   */
   void prune_right(node n, bintree<T> & dest);
@@ -121,20 +121,20 @@ public:
      @param n: nodo del receptor. !n.null().
      @param e: etiqueta del nuevo nodo.
      
-     Desconecta y destruye el subárbol a la izquierda de n, inserta
+     Desconecta y destruye el subï¿½rbol a la izquierda de n, inserta
      un nuevo nodo con etiqueta e como hijo a la izquierda
   */
   void insert_left(const bintree<T>::node & n, const T & e);
 
   /**
-     @brief Insertar un árbol como subárbol a la izquierda de un nodo.
+     @brief Insertar un ï¿½rbol como subï¿½rbol a la izquierda de un nodo.
 
      @param n: nodo del receptor. n != nodo_nulo.
-     @param rama: subárbol que se inserta. Es MODIFICADO.
+     @param rama: subï¿½rbol que se inserta. Es MODIFICADO.
 
-     Desconecta y destruye el subárbol a la izquierda de n, le
-     asigna el valor de rama como nuevo subárbol a la izquierda
-     y rama se hace árbol nulo.
+     Desconecta y destruye el subï¿½rbol a la izquierda de n, le
+     asigna el valor de rama como nuevo subï¿½rbol a la izquierda
+     y rama se hace ï¿½rbol nulo.
   */
   void insert_left(node n, bintree<T> & rama);
 
@@ -144,51 +144,51 @@ public:
      @param n: nodo del receptor. !n.Nulo().
      @param e: etiqueta del nuevo nodo.
 
-     Desconecta y destruye el subárbol a la derecha de n, inserta
+     Desconecta y destruye el subï¿½rbol a la derecha de n, inserta
      un nuevo nodo con etiqueta e como hijo a la derecha
   */
   void insert_right(node n, const T & e);
 
   /**
-     @brief Insertar un árbol como subárbol a la derecha de un nodo.
+     @brief Insertar un ï¿½rbol como subï¿½rbol a la derecha de un nodo.
 
      @param n: nodo del receptor. !n.Nulo().
-     @param rama: subárbol que se inserta. Es MODIFICADO.
+     @param rama: subï¿½rbol que se inserta. Es MODIFICADO.
 
-     Desconecta y destruye el subárbol a la izquierda de n, le
-     asigna el valor de rama como nuevo subárbol a la derecha
-     y rama se hace árbol nulo.
+     Desconecta y destruye el subï¿½rbol a la izquierda de n, le
+     asigna el valor de rama como nuevo subï¿½rbol a la derecha
+     y rama se hace ï¿½rbol nulo.
   */
   void insert_right(node n, bintree<T> & rama);
 
   /**
-     @brief Hace nulo un árbol.
+     @brief Hace nulo un ï¿½rbol.
 
-     Destruye todos los nodos del árbol receptor y lo hace
-     un árbol nulo.
+     Destruye todos los nodos del ï¿½rbol receptor y lo hace
+     un ï¿½rbol nulo.
   */
   void clear();
 
   /**
-     @brief Obtiene el número de nodos.
+     @brief Obtiene el nï¿½mero de nodos.
 
-     @return número de nodos del receptor.
+     @return nï¿½mero de nodos del receptor.
   */
   size_type size() const;
 
   /**
-     @brief Comprueba si un árbol está vacío (es nulo).
+     @brief Comprueba si un ï¿½rbol estï¿½ vacï¿½o (es nulo).
 
-     @return true, si el receptor está vacío (es nulo).
+     @return true, si el receptor estï¿½ vacï¿½o (es nulo).
              false, en otro caso.
   */
   bool empty() const;
 
 
   /**
-     @brief Operador de comparación de igualdad.
+     @brief Operador de comparaciï¿½n de igualdad.
 
-     @param a: árbol con que se compara el receptor.
+     @param a: ï¿½rbol con que se compara el receptor.
      
      @return  true, si el receptor es igual, en estructura y
                  etiquetas a a.
@@ -197,9 +197,9 @@ public:
   bool operator==(const bintree<T> & a) const;
 
   /**
-     @brief Operador de comparación de desigualdad.
+     @brief Operador de comparaciï¿½n de desigualdad.
 
-     @param a: árbol con que se compara el receptor.
+     @param a: ï¿½rbol con que se compara el receptor.
 
      @return  true, si el receptor no es igual, en estructura o
                     etiquetas a a.
@@ -209,19 +209,19 @@ public:
   
   
   /**
-     @brief Reemplaza el subárbol a partir de pos por una copia de subárbol.
+     @brief Reemplaza el subï¿½rbol a partir de pos por una copia de subï¿½rbol.
 
-     @param pos nodo a partir del que se colagará la copia
+     @param pos nodo a partir del que se colagarï¿½ la copia
      @param a Arbol desde el que se copia.
-     @param n nodo raíz del subárbol que se copia.
+     @param n nodo raï¿½z del subï¿½rbol que se copia.
 
      El receptor se modifica colocando a partir de pos una copia
-     del subárbol de a cuya raíz es n.
+     del subï¿½rbol de a cuya raï¿½z es n.
   */
   void replace_subtree(node pos, const bintree<T> &a, node n);
 
   /**
-     Clase iterator para recorrer el árbol en PreOrden
+     Clase iterator para recorrer el ï¿½rbol en PreOrden
   */
   class preorder_iterator {
   public:
@@ -264,7 +264,7 @@ public:
 
 
   /**
-     Clase iterator para recorrer el árbol en Inorden
+     Clase iterator para recorrer el ï¿½rbol en Inorden
   */
 
  class inorder_iterator
@@ -309,7 +309,7 @@ class const_inorder_iterator
 
 
   /**
-     Clase iterator para recorrer el árbol en PostOrden
+     Clase iterator para recorrer el ï¿½rbol en PostOrden
   */
 
  class postorder_iterator
@@ -350,7 +350,7 @@ class const_postorder_iterator
 
 
   /**
-     Clase iterator para recorrer el árbol por niveles
+     Clase iterator para recorrer el ï¿½rbol por niveles
   */
 
  class level_iterator
@@ -395,59 +395,59 @@ private:
 
   // Funciones auxiliares
   /**
-     @brief Destruir subárbol.
+     @brief Destruir subï¿½rbol.
 
-     @param n: nodo raíz del subárbol que se destruye.
+     @param n: nodo raï¿½z del subï¿½rbol que se destruye.
      @doc:
-     Destruye el subárbol cuya raíz es n.
+     Destruye el subï¿½rbol cuya raï¿½z es n.
   */
   void destroy(bintree<T>::node n);
   
   
   /**
-     @brief Copia subárbol.
+     @brief Copia subï¿½rbol.
 
      @param dest: nodo sobre el que se copia. dest.null().
             Es MODIFICADO.
-     @param orig: raíz del subárbol que se copia.
+     @param orig: raï¿½z del subï¿½rbol que se copia.
 
      @doc
-     Destruye el subárbol con raíz en dest. Sobre éste realiza
-     un duplicado del subárbol con raíz en orig.
+     Destruye el subï¿½rbol con raï¿½z en dest. Sobre ï¿½ste realiza
+     un duplicado del subï¿½rbol con raï¿½z en orig.
   */
   void copy(node & dest, const node &orig);
   
   
   /**
-     @brief Cuenta el número de nodos.
+     @brief Cuenta el nï¿½mero de nodos.
     
-     @param n: raíz del subárbol a contar.
+     @param n: raï¿½z del subï¿½rbol a contar.
 
-     @return devuelve el número de nodos del subárbol que
-             tiene n como raíz.
+     @return devuelve el nï¿½mero de nodos del subï¿½rbol que
+             tiene n como raï¿½z.
 
-     Cuenta el número de nodos en el subárbol cuuya raíz es n.
+     Cuenta el nï¿½mero de nodos en el subï¿½rbol cuuya raï¿½z es n.
   */
   int count(node n) const;
     
   /**
-     @brief Comparación de igualdad.
+     @brief Comparaciï¿½n de igualdad.
 
-     @param n1: raiz del primer subárbol.
-     @param n2: raiz del segundo subárbol.
+     @param n1: raiz del primer subï¿½rbol.
+     @param n2: raiz del segundo subï¿½rbol.
 
-     @return true, si los dos subárboles son iguales, en
+     @return true, si los dos subï¿½rboles son iguales, en
                    estructura y etiquetas.
              false, en otro caso.
   */
   bool equals(node n1, node n2) const;
 
-  // Representación
+  // Representaciï¿½n
   node laraiz;
   
   /** 
       TDA nodo.
-      Modela los nodos del árbol binario.
+      Modela los nodos del ï¿½rbol binario.
   */
   
   class nodewrapper {
@@ -518,19 +518,19 @@ public:
     void remove();
       
     /**
-       @brief Operador de asignación
+       @brief Operador de asignaciï¿½n
        @param n: el nodo a asignar
     */
     node & operator=(const node & n);
       
     /**
-       @brief Operador de comparación de igualdad
+       @brief Operador de comparaciï¿½n de igualdad
        @param n: el nodo con el que se compara
     */
     bool operator==(const node & n) const;
       
     /**
-       @brief Operador de comparación de desigualdad
+       @brief Operador de comparaciï¿½n de desigualdad
        @param n: el nodo con el que se compara
     */
     bool operator!=(const node & n) const;
@@ -565,6 +565,7 @@ public:
 
     nodewrapper * elnodo;
   };
+
 };
 
 #include "bintree.hxx"

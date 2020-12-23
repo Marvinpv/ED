@@ -3,17 +3,17 @@
 
 /*
 ************************************************************ 
-* Implementaci¨®n
+* Implementaciï¿½ï¿½n
 ************************************************************
 */
 
 /*
-  Funci¨®n de Abstracci¨®n:
+  Funciï¿½ï¿½n de Abstracciï¿½ï¿½n:
   ----------------------
   Dado el objeto del tipo rep r, r = {laraiz}, el objeto
   abstracto al que representa es:
   a) Arbol nulo, si r.laraiz.null().
-  b) Arbol con un ¨²nico nodo de etiqueta *(r.laraiz)
+  b) Arbol con un ï¿½ï¿½nico nodo de etiqueta *(r.laraiz)
      si r.laraiz.left().null() y r.laraiz.dcha().null()
 
   c)                    *(r.laraiz)
@@ -22,12 +22,12 @@
       Arbol(r.laraiz.left())    Arbol(r.laraiz.right())
 
 
-  Invariante de Representaci¨®n:
+  Invariante de Representaciï¿½ï¿½n:
   ----------------------------
   Si !r.laraiz.null(),
   -   r.laraiz.parent().null().
 
-  Para cualquier nodo n del ¨¢rbol:
+  Para cualquier nodo n del ï¿½ï¿½rbol:
   Si !n.left().null()
       n.left().parent() == n;
   Si !n.right().null()
@@ -151,7 +151,7 @@ void bintree<T>::assign_subtree(const bintree<T> & a,
     copy(laraiz, n);
     if (!laraiz.null())
       laraiz.parent(typename bintree<T>::node());
-  } else {  // Reemplazar el receptor por un subárbol suyo.
+  } else {  // Reemplazar el receptor por un subï¿½rbol suyo.
     if (laraiz != n) {
       typename bintree<T>::node nod(laraiz);
       laraiz = n;
@@ -1207,4 +1207,3 @@ void bintree<T>::replace_subtree(typename bintree<T>::node pos, const bintree<T>
      }
    }
 }
-
